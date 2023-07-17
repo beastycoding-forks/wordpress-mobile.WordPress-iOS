@@ -24,7 +24,13 @@ import UIKit
     }
 
     var key: String {
-        return description
+        switch self {
+        /// Don't show an overlay from the campaigns list screen if it's already been shown from the dashboard card
+        case .campaignList:
+            return BlazeSource.dashboardCard.description
+        default:
+            return description
+        }
     }
 
     var frequencyType: OverlayFrequencyTracker.FrequencyType {
