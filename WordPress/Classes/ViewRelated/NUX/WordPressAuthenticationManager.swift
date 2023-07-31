@@ -63,16 +63,6 @@ extension WordPressAuthenticationManager {
         // Ref https://github.com/wordpress-mobile/WordPress-iOS/pull/12332#issuecomment-521994963
         let enableSignInWithApple = !(BuildConfiguration.current ~= [.a8cBranchTest, .a8cPrereleaseTesting])
 
-        let googleLogingWithoutSDK: Bool = {
-            switch BuildConfiguration.current {
-            case .appStore:
-                // Rely on the remote flag in production
-                return RemoteFeatureFlag.sdkLessGoogleSignIn.enabled(using: remoteFeaturesStore)
-            default:
-                return true
-            }
-        }()
-
         return WordPressAuthenticatorConfiguration(wpcomClientId: ApiCredentials.client,
                                                    wpcomSecret: ApiCredentials.secret,
                                                    wpcomScheme: WPComScheme,
@@ -89,8 +79,7 @@ extension WordPressAuthenticationManager {
                                                    enableSignupWithGoogle: AppConfiguration.allowSignUp,
                                                    enableUnifiedAuth: true,
                                                    enableUnifiedCarousel: FeatureFlag.unifiedPrologueCarousel.enabled,
-                                                   enableSocialLogin: true,
-                                                   googleLoginWithoutSDK: googleLogingWithoutSDK)
+                                                   enableSocialLogin: true)
     }
 
     private func authenticatorStyle() -> WordPressAuthenticatorStyle {
