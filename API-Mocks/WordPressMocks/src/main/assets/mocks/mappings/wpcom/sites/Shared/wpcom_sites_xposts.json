@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/wpcom/v2/sites/.*/xposts.*",
+    "queryParameters": {
+      "locale": {
+        "matches": "(.*)"
+      },
+      "decode_html": {
+        "matches": "(.*)"
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "jsonBody": {
+      "code": "xposts_require_o2_enabled",
+      "message": "Xposts are only available on sites with the o2-plugin enabled.",
+      "data": {
+        "status": 400
+      }
+    }
+  }
+}

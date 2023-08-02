@@ -6,11 +6,8 @@
       "locale": {
         "matches": "(.*)"
       },
-      "authors_only": {
-        "equalTo": "1"
-      },
       "number": {
-        "equalTo": "100"
+        "matches": "(.*)"
       }
     }
   },
