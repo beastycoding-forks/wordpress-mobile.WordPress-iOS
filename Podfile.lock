@@ -90,9 +90,6 @@ PODS:
   - OHHTTPStubs/Swift (9.1.0):
     - OHHTTPStubs/Default
   - Reachability (3.2)
-  - SDWebImage (5.11.1):
-    - SDWebImage/Core (= 5.11.1)
-  - SDWebImage/Core (5.11.1)
   - Sentry (8.9.4):
     - Sentry/Core (= 8.9.4)
     - SentryPrivate (= 8.9.4)
@@ -163,7 +160,6 @@ DEPENDENCIES:
   - OCMock (~> 3.4.3)
   - OHHTTPStubs/Swift (~> 9.1.0)
   - Reachability (= 3.2)
-  - SDWebImage (~> 5.11.1)
   - Starscream (= 3.0.6)
   - SVProgressHUD (= 2.2.5)
   - SwiftLint (~> 0.50)
@@ -203,7 +199,6 @@ SPEC REPOS:
     - OCMock
     - OHHTTPStubs
     - Reachability
-    - SDWebImage
     - Sentry
     - SentryPrivate
     - Sodium
@@ -269,7 +264,6 @@ SPEC CHECKSUMS:
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
   OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   Sentry: 56c76eed917f7dffd46db50906afbf5c9aa2673a
   SentryPrivate: f3be34b5deb9fe676fdfb1f1ad5cdb1b740c5688
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
@@ -294,6 +288,6 @@ SPEC CHECKSUMS:
   ZendeskSupportSDK: 3a8e508ab1d9dd22dc038df6c694466414e037ba
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 7c2cb3345b7f74a702dad5416d46a9c446e9cf13
+PODFILE CHECKSUM: 714600f6e31974d31d0a45bf792469512787390c
 
 COCOAPODS: 1.12.1
