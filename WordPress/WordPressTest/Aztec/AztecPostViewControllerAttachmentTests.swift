@@ -63,11 +63,11 @@ class AztecPostViewControllerAttachmentTests: CoreDataTestCase {
 
     private struct Fixtures {
         static func createPost(context: NSManagedObjectContext, with media: Media) -> Post {
-            let post = Post(context: context)
-            post.content = """
-                <p><img src="" \(MediaAttachment.uploadKey)="\(media.uploadID)"></p>
-            """
-            return post
+            PostBuilder(context)
+                .with(snippet: """
+                    <p><img src="" \(MediaAttachment.uploadKey)="\(media.uploadID)"></p>
+                """)
+                .build()
         }
 
         static func createAztecPostViewController(with post: Post) -> AztecPostViewController {
