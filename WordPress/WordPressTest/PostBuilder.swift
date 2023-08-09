@@ -88,11 +88,13 @@ class PostBuilder {
         return self
     }
 
+    @discardableResult
     func with(title: String) -> PostBuilder {
         post.postTitle = title
         return self
     }
 
+    @discardableResult
     func with(snippet: String) -> PostBuilder {
         post.content = snippet
         return self

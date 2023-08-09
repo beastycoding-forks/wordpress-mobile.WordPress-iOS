@@ -154,19 +154,20 @@ class PostEditorAnalyticsSessionTests: CoreDataTestCase {
 }
 
 extension PostEditorAnalyticsSessionTests {
-    func createPost(title: String? = nil, body: String? = nil, blogID: NSNumber? = nil) -> AbstractPost {
-        let post = AbstractPost(context: mainContext)
-        post.postTitle = title
-        post.content = body
-        post.blog = Blog(context: mainContext)
-        post.blog.dotComID = blogID
-        return post
-    }
 
     @discardableResult
     func startSession(editor: PostEditorAnalyticsSession.Editor, postTitle: String? = nil, postContent: String? = nil, unsupportedBlocks: [String] = [], blogID: NSNumber? = nil) -> PostEditorAnalyticsSession {
-        let post = createPost(title: postTitle, body: postContent, blogID: blogID)
-        var session = PostEditorAnalyticsSession(editor: .gutenberg, post: post)
+        let postBuilder = PostBuilder(
+            mainContext,
+            blog: blogID.map { BlogBuilder(mainContext).with(blogID: $0.intValue).build() }
+        )
+        if let postTitle {
+            postBuilder.with(title: postTitle)
+        }
+        if let postContent {
+            postBuilder.with(snippet: postContent)
+        }
+        var session = PostEditorAnalyticsSession(editor: .gutenberg, post: postBuilder.build())
         session.start(unsupportedBlocks: unsupportedBlocks)
         return session
     }
