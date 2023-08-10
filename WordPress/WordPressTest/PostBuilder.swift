@@ -20,16 +20,12 @@ class PostBuilder: CoreDataModelBuilding {
     }
 
     private static func buildPost(context: NSManagedObjectContext) -> Post {
-        let blog = NSEntityDescription.insertNewObject(forEntityName: Blog.entityName(), into: context) as! Blog
-        blog.xmlrpc = "http://example.com/xmlrpc.php"
-        blog.url = "http://example.com"
-        blog.username = "test"
-        blog.password = "test"
+        let blog = BlogBuilder(context)
+            .with(username: "testuser")
+            .with(password: "testpassword")
+            .build()
 
-        let post = NSEntityDescription.insertNewObject(forEntityName: Post.entityName(), into: context) as! Post
-        post.blog = blog
-
-        return post
+        return PostBuilder(context, blog: blog).build()
     }
 
     func published() -> PostBuilder {
