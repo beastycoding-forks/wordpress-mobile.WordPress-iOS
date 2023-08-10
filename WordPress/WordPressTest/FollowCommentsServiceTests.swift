@@ -198,15 +198,10 @@ class FollowCommentsServiceTests: CoreDataTestCase {
        }
 
        func seedBlog(isWPForTeams: Bool) {
-           let blog = NSEntityDescription.insertNewObject(forEntityName: Blog.classNameWithoutNamespaces(), into: mainContext) as! Blog
-           blog.dotComID = siteID
-           blog.xmlrpc = "http://test.blog/xmlrpc.php"
-           blog.url = "http://test.blog/"
-           blog.options = [
-               "is_wpforteams_site": [
-                   "value": NSNumber(value: isWPForTeams)
-               ]
-           ]
+           BlogBuilder(mainContext)
+               .with(dotComID: siteID.intValue)
+               .with(isWPForTeamsSite: isWPForTeams)
+               .build()
 
            do {
                try mainContext.save()
