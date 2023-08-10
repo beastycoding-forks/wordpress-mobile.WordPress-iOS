@@ -5,7 +5,7 @@ import Foundation
 /// Creates a Blog
 ///
 /// Defaults to creating a self-hosted blog
-final class BlogBuilder {
+final class BlogBuilder: CoreDataModelBuilding {
     private let blog: Blog
 
     private let context: NSManagedObjectContext

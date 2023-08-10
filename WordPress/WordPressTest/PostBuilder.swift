@@ -5,8 +5,12 @@ import Foundation
 /// Builds a Post
 ///
 /// Defaults to creating a post in a self-hosted site.
-class PostBuilder {
+class PostBuilder: CoreDataModelBuilding {
     private let post: Post
+
+    required convenience init(_ context: NSManagedObjectContext) {
+        self.init(context, blog: nil)
+    }
 
     init(_ context: NSManagedObjectContext = PostBuilder.setUpInMemoryManagedObjectContext(), blog: Blog? = nil) {
         post = NSEntityDescription.insertNewObject(forEntityName: Post.entityName(), into: context) as! Post
