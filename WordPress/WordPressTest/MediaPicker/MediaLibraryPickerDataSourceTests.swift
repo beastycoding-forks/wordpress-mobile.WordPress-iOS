@@ -14,8 +14,7 @@ class MediaLibraryPickerDataSourceTests: CoreDataTestCase {
         blog = NSEntityDescription.insertNewObject(forEntityName: "Blog", into: mainContext) as? Blog
         blog.url = "http://wordpress.com"
         blog.xmlrpc = "http://wordpress.com"
-        post = NSEntityDescription.insertNewObject(forEntityName: Post.entityName(), into: mainContext) as? Post
-        post.blog = blog
+        post = PostBuilder(mainContext, blog: blog).build()
         dataSource = MediaLibraryPickerDataSource(blog: blog)
     }
 
