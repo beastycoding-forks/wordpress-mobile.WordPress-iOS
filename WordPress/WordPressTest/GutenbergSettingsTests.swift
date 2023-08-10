@@ -11,9 +11,7 @@ class GutenbergSettingsTests: CoreDataTestCase {
     var post: Post!
 
     fileprivate func newTestPost(with blog: Blog) -> Post {
-        let post = NSEntityDescription.insertNewObject(forEntityName: Post.entityName(), into: mainContext) as! Post
-        post.blog = blog
-        return post
+        PostBuilder(mainContext, blog: blog).build()
     }
 
     private func newTestBlog(isWPComAPIEnabled: Bool = true) -> Blog {
