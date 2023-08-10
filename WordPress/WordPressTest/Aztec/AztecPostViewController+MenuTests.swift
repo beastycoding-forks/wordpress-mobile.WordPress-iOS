@@ -19,11 +19,11 @@ class AztecPostViewController_MenuTests: CoreDataTestCase {
 
     private var aztecPostViewController: Mock!
 
-    private func blogPost(with content: String?) -> Post {
+    private func blogPost(with content: String) -> Post {
         let blog = ModelTestHelper.insertSelfHostedBlog(context: mainContext)
-        let post = NSEntityDescription.insertNewObject(forEntityName: Post.entityName(), into: mainContext) as! Post
-        post.blog = blog
-        post.content = content
+        let post = PostBuilder(mainContext, blog: blog)
+            .with(snippet: content)
+            .build()
         let settings = GutenbergSettings(database: EphemeralKeyValueDatabase())
         settings.setGutenbergEnabled(true, for: blog)
         return post
