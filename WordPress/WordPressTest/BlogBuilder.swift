@@ -186,11 +186,6 @@ final class BlogBuilder: CoreDataModelBuilding {
     }
 
     @discardableResult
-    func build() -> Blog {
-        return blog
-    }
-
-    @discardableResult
     func set(blogOption key: String, value: Any) -> Self {
         var options = blog.options ?? [AnyHashable: Any]()
         options[key] = [
@@ -205,6 +200,11 @@ final class BlogBuilder: CoreDataModelBuilding {
         blog.postFormats = postFormats
 
         return self
+    }
+
+    @discardableResult
+    func build() -> Blog {
+        return blog
     }
 }
 
