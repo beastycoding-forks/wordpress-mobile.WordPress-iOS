@@ -601,6 +601,8 @@ NSString * const OptionsKeyIsWPForTeams = @"is_wpforteams_site";
             return [self supportsBlockEditorSettings];
         case BlogFeatureLayoutGrid:
             return [self supportsLayoutGrid];
+        case BlogFeaturePaywall:
+            return [self supportsPaywall];
         case BlogFeatureTiledGallery:
             return [self supportsTiledGallery];
         case BlogFeatureVideoPress:
@@ -718,6 +720,11 @@ NSString * const OptionsKeyIsWPForTeams = @"is_wpforteams_site";
 - (BOOL)supportsLayoutGrid
 {
     return self.isHostedAtWPcom || self.isAtomic;
+}
+
+- (BOOL)supportsPaywall
+{
+    return true;
 }
 
 - (BOOL)supportsTiledGallery

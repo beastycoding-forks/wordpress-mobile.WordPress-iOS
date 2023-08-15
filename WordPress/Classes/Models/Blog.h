@@ -87,6 +87,8 @@ typedef NS_ENUM(NSUInteger, BlogFeature) {
     /// Does the blog support Jetpack contact info block?
     BlogFeatureContactInfo,
     BlogFeatureBlockEditorSettings,
+    /// Does the blog support Jetpack paywall block?
+    BlogFeaturePaywall,
     /// Does the blog support the Layout grid block?
     BlogFeatureLayoutGrid,
     /// Does the blog support the tiled gallery block?
