@@ -397,7 +397,7 @@ extension WordPressAuthenticationManager: WordPressAuthenticatorDelegate {
 
     /// Presents the Signup Epilogue, in the specified NavigationController.
     ///
-    func presentSignupEpilogue(in navigationController: UINavigationController, for credentials: AuthenticatorCredentials, service: SocialService?) {
+    func presentSignupEpilogue(in navigationController: UINavigationController, for credentials: AuthenticatorCredentials, socialUser: SocialUser?) {
 
         let storyboard = UIStoryboard(name: "SignupEpilogue", bundle: .main)
         guard let epilogueViewController = storyboard.instantiateInitialViewController() as? SignupEpilogueViewController else {
@@ -405,7 +405,7 @@ extension WordPressAuthenticationManager: WordPressAuthenticatorDelegate {
         }
 
         epilogueViewController.credentials = credentials
-        epilogueViewController.socialService = service
+        epilogueViewController.socialUser = socialUser
         epilogueViewController.onContinue = { [weak self, weak navigationController] in
             guard let self, let navigationController else {
                 return
