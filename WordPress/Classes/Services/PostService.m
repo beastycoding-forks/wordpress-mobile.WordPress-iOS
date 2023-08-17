@@ -779,6 +779,7 @@ typedef void (^AutosaveSuccessBlock)(RemotePost *post, NSString *previewURL);
         NSString *publicID = nil;
         NSString *publicizeMessage = nil;
         NSString *publicizeMessageID = nil;
+        NSString *jetpackNewsletterAccess = nil;
         if (remotePost.metadata) {
             NSDictionary *latitudeDictionary = [self dictionaryWithKey:@"geo_latitude" inMetadata:remotePost.metadata];
             NSDictionary *longitudeDictionary = [self dictionaryWithKey:@"geo_longitude" inMetadata:remotePost.metadata];
@@ -794,11 +795,14 @@ typedef void (^AutosaveSuccessBlock)(RemotePost *post, NSString *previewURL);
             NSDictionary *publicizeMessageDictionary = [self dictionaryWithKey:@"_wpas_mess" inMetadata:remotePost.metadata];
             publicizeMessage = [publicizeMessageDictionary stringForKey:@"value"];
             publicizeMessageID = [publicizeMessageDictionary stringForKey:@"id"];
+            NSDictionary *jetpackNewsletterAccessDictionary = [self dictionaryWithKey:@"_jetpack_newsletter_access" inMetadata:remotePost.metadata];
+            jetpackNewsletterAccess = [jetpackNewsletterAccessDictionary stringForKey:@"value"];
         }
         postPost.publicID = publicID;
         postPost.publicizeMessage = publicizeMessage;
         postPost.publicizeMessageID = publicizeMessageID;
         postPost.disabledPublicizeConnections = [self disabledPublicizeConnectionsForPost:post andMetadata:remotePost.metadata];
+        postPost.jetpackNewsletterAccess = jetpackNewsletterAccess;
     }
 
     post.statusAfterSync = post.status;
