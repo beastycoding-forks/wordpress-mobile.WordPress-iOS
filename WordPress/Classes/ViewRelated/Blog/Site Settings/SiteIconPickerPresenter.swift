@@ -66,20 +66,49 @@ final class SiteIconPickerPresenter: NSObject {
         unregisterChangeObserver()
     }
 
+    func presentPhotosPicker(from presentingViewController: UIViewController) {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        presentingViewController.present(picker, animated: true)
+    }
+
+    func presentCamera(from presentingViewController: UIViewController) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .camera
+        picker.allowsEditing = false
+        presentingViewController.present(picker, animated: true, completion: nil)
+    }
+
+    func presentMediaLibraryPicker(from presentingViewController: UIViewController) {
+        let options = WPMediaPickerOptions()
+        options.showMostRecentFirst = true
+        options.filter = [.image]
+        options.allowMultipleSelection = false
+        options.showSearchBar = true
+        options.badgedUTTypes = [UTType.gif.identifier]
+        options.preferredStatusBarStyle = WPStyleGuide.preferredStatusBarStyle
+
+        let pickerViewController = WPNavigationMediaPickerViewController(options: options)
+
+        let dataSource = MediaLibraryPickerDataSource(blog: blog)
+        dataSource.ignoreSyncErrors = true
+
+        pickerViewController.dataSource = dataSource
+        pickerViewController.delegate = self
+        pickerViewController.modalPresentationStyle = .formSheet
+
+        presentingViewController.present(mediaPickerViewController, animated: true)
+    }
+
     /// Presents a new WPMediaPickerViewController instance.
     ///
     @objc func presentPickerFrom(_ viewController: UIViewController) {
-        if FeatureFlag.nativePhotoPicker.enabled {
-            var configuration = PHPickerConfiguration()
-            configuration.filter = .images
-
-            let picker = PHPickerViewController(configuration: configuration)
-            picker.delegate = self
-            viewController.present(picker, animated: true)
-        } else {
-            viewController.present(mediaPickerViewController, animated: true)
-            registerChangeObserver(forPicker: mediaPickerViewController.mediaPicker)
-        }
+        viewController.present(mediaPickerViewController, animated: true)
+        registerChangeObserver(forPicker: mediaPickerViewController.mediaPicker)
     }
 
     // MARK: - Private Methods
@@ -211,6 +240,19 @@ extension SiteIconPickerPresenter: PHPickerViewControllerDelegate {
         }
     }
 }
+
+extension SiteIconPickerPresenter: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                #warning("Fix this")
+                self.showImageCropViewController(image)
+            }
+        }
+    }
+}
+
+extension SiteIconPickerPresenter: UINavigationControllerDelegate {}
 
 extension SiteIconPickerPresenter: WPMediaPickerViewControllerDelegate {
 
